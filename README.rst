@@ -1,10 +1,24 @@
+|Travis| |Python27| |Python35| |PyPi|
+
+.. |Travis| image:: https://api.travis-ci.org/staticdev/django-pagination-bootstrap.svg?branch=master
+   :target: https://travis-ci.org/staticdev/django-pagination-bootstrap
+
+.. |Python27| image:: https://img.shields.io/badge/python-2.7-blue.svg
+   :target: https://badge.fury.io/py/django-pagination-bootstrap
+
+.. |Python35| image:: https://img.shields.io/badge/python-3.5-blue.svg
+   :target: https://badge.fury.io/py/django-pagination-bootstrap
+
+.. |PyPi| image:: https://badge.fury.io/py/django-pagination-bootstrap.svg
+   :target: https://badge.fury.io/py/django-pagination-bootstrap
+
+
 django-pagination-bootstrap
 ===========================
 
-.. image:: https://pypip.in/v/django-pagination-bootstrap/badge.png
-        :target: https://pypi.python.org/pypi/django-pagination-bootstrap
-
 Django-pagination-bootstrap is an app to easy add pagination in Django_, using `Bootstrap`_'s layout.
+
+======
 
 Installation
 ------------
@@ -31,7 +45,9 @@ We need to hook ``django-pagination-bootstrap`` into our project.
           'pagination_bootstrap.middleware.PaginationMiddleware',
       )
 
-3. If it's not already added in your setup, add the request context processor. Note that context processors are set by default implicitly, so to set them explicitly, you need to copy and paste this code into your under the value TEMPLATE_CONTEXT_PROCESSORS::
+3. If it's not already added in your setup, add the request context processor. Note that context processors are set by default implicitly, so to set them explicitly, you need to copy and paste this code into your under the value TEMPLATE_CONTEXT_PROCESSORS.
+
+For pre-1.8 django versions::
 
       TEMPLATE_CONTEXT_PROCESSORS = (
       "django.contrib.auth.context_processors.auth",
@@ -40,6 +56,25 @@ We need to hook ``django-pagination-bootstrap`` into our project.
       "django.core.context_processors.media",
       "django.core.context_processors.request"
       )
+
+For post-1.8 django versions::
+
+      TEMPLATES = [
+          {
+              "BACKEND": "django.template.backends.django.DjangoTemplates",
+              "DIRS": [],
+              "APP_DIRS": True,
+              "OPTIONS": {
+                  "context_processors": [
+                      "django.template.context_processors.debug",
+                      "django.template.context_processors.request",
+                      "django.contrib.auth.context_processors.auth",
+                      "django.template.context_processors.i18n",
+                      "django.template.context_processors.media",
+                  ],
+              },
+          },
+      ]
 
 4. Add this line at the top of your template to load the pagination tags::
 
@@ -101,7 +136,7 @@ Determines whether an invalid page raises an Http404 or just sets the invalid_pa
 Credits
 ------------
 
-This is based on Eric Florenzano's django-pagination 1.0.7 and is an updated version of https://github.com/tgdn/django-bootstrap-pagination for Django 1.4 or higher.
+This is based on Eric Florenzano's django-pagination 1.0.7 and is an updated version of https://github.com/tgdn/django-bootstrap-pagination for Django 1.7 or higher.
 
 .. _Django: https://www.djangoproject.com/
 .. _Bootstrap: http://getbootstrap.com/
